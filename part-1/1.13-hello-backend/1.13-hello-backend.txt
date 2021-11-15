@@ -1,0 +1,11 @@
+Dockerfile:
+  FROM golang:1.16-alpine
+  WORKDIR /usr/src/app
+  EXPOSE 8080
+  COPY . .
+  RUN go build
+  CMD ["./server"]
+
+Commands:
+  docker build . -t backend
+  docker run -it --rm -p 8080:8080 backend

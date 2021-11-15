@@ -1,0 +1,28 @@
+Dockerfile Frontend:
+  FROM node:14-alpine
+  WORKDIR /usr/src/app
+  EXPOSE 5000
+  COPY package*.json ./
+  RUN npm install --loglevel=error
+  RUN npm install -g serve
+  RUN apk add --update xsel
+  COPY . .
+  RUN REACT_APP_BACKEND_URL=http://localhost:8080/ npm run build
+  CMD ["serve", "-s", "-l", "5000", "build"]
+
+Dockerfile Backend:
+  FROM golang:1.16-alpine
+  WORKDIR /usr/src/app
+  ENV REQUEST_ORIGIN http://localhost:5000
+  COPY . .
+  RUN go build
+  CMD ["./server"]
+  EXPOSE 8080
+
+Commands:
+  1st terminal: 
+    docker build . -t frontend
+    docker run -it --rm -p:5000:5000 frontend
+  2nd terminal:
+    docker build . -t backend
+    docker run -it --rm -p 8080:8080 backend

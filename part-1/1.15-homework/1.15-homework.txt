@@ -1,0 +1,4 @@
+Docker Hub app image link:
+  https://hub.docker.com/repository/docker/ilyakozak/shop-cart-api
+Github Repo:
+  https://github.com/IlyaKozak/shop-cart-api

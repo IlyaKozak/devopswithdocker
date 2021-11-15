@@ -1,0 +1,10 @@
+Dockerfile:
+  FROM ubuntu:18.04
+  WORKDIR /usr/src/app
+  RUN apt-get update && apt-get install -y curl
+  COPY 1.8.bash .
+  CMD ./1.8.bash
+
+Commands:
+  docker build . -t curler
+  docker run -it curler

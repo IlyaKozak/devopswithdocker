@@ -1,0 +1,5 @@
+Commands:
+  docker run -d nginx
+  docker run -d nginx
+  docker run -d nginx
+  docker ps -a

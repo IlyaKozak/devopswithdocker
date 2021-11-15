@@ -1,0 +1,8 @@
+Commands:
+  1st terminal: docker pull devopsdockeruh/simple-web-service:alpine
+  1st terminal: docker image ls
+  1st terminal: docker run --name web-service-alpine devopsdockeruh/simple-web-service:alpine
+  2nd terminal: docker exec -it web-service-alpine sh
+  2nd terminal/sh: tail -f ./text.log
+
+Secret message is: 'You can find the source code here: https://github.com/docker-hy'

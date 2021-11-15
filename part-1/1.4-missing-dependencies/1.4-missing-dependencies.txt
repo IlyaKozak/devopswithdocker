@@ -1,0 +1,5 @@
+Commands:
+  1st terminal: docker run -it --name site ubuntu sh -c 'echo "Input website:"; read website; echo "Searching.."; sleep 1; curl http://$website;
+  2nd terminal: docker exec -it site bash
+  2nd terminal/bash: apt-get update && apt-get install -y curl
+  1st terminal/container: helsinki.fi
