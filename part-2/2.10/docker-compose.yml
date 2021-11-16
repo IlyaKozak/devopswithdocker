@@ -1,0 +1,45 @@
+version: '3.5'
+
+services:
+
+  # https://github.com/docker-hy/material-applications/tree/main/example-frontend
+  frontend:
+    image: frontend
+    command: ["serve", "-s", "-l", "5000", "build"]
+
+  # https://github.com/docker-hy/material-applications/tree/main/example-backend
+  backend:
+    image: backend
+    environment:
+      - REDIS_HOST=redis
+      - POSTGRES_HOST=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DATABASE=postgres
+    command: ["./server"]
+    depends_on:
+      - redis
+      - postgres
+
+  redis:
+    image: redis
+    restart: unless-stopped
+    command: ["redis-server", "--save", "60", "1", "--loglevel", "warning"]
+  
+  postgres:
+    image: postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ~/postgres:/var/lib/postgresql/data
+  
+  nginx:
+    image: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80:80
+    depends_on:
+      - backend
+      - frontend

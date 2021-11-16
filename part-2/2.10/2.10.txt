@@ -1,0 +1,12 @@
+Steps to make every button for exercises works in the app:
+  1) Changes in docker-compose.yml (BEFORE => AFTER):
+  - REACT_APP_BACKEND_URL=http://localhost:8080/ =>
+  - REQUEST_ORIGIN=http://localhost:5000 =>
+
+  2) Change in frontend Dockerfile (BEFORE => AFTER):
+  - RUN REACT_APP_BACKEND_URL=http://localhost:8080/ npm run build => RUN npm run build
+
+  3) Change in backend Dockerfile (BEFORE => AFTER):
+  - ENV REQUEST_ORIGIN http://localhost:5000 =>
+
+  4) Rebuild frontend and backend images

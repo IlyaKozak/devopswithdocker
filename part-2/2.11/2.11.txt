@@ -1,0 +1,14 @@
+Development:
+1) package.json script: 
+  "start": "nodemon --legacy-watch --exitcrash --config nodemon.json"
+2) Dockerfile:
+  FROM node:14-alpine
+  WORKDIR /app
+  COPY package*.json ./
+  RUN npm install
+  COPY . .
+  CMD ["npm", "start"]
+3) docker-compose:
+  - app connectection to PostgreSQL through user-defined network
+  - volumes created for src folder (to automatically restart app on any changes in src code with nodemone)
+  - volume create for logs folder (to preserve logs)
